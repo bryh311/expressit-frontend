@@ -28,6 +28,7 @@ export default function RegisterUser(props) {
             .then((res) => {
                 const token = res.data.access_token
                 localStorage.setItem("auth_token", token)
+                localStorage.setItem("email", user.email)
             })
             setUser({
                 email: '',

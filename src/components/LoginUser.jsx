@@ -23,6 +23,7 @@ export default function LoginUser() {
             if (res.data.access_token) {
                 localStorage.removeItem("auth_token")
                 localStorage.setItem("auth_token", res.access_token)
+                localStorage.setItem("email", user.email)
             }
             
         })
