@@ -42,7 +42,7 @@ export default function RegisterUser(props) {
         })
         .catch((err) => {
             if (err.response) {
-                if (err.response.data.error == "SQLITE_CONSTRAINT: UNIQUE constraint failed: user.email") {
+                if (err.response.data.error === "SQLITE_CONSTRAINT: UNIQUE constraint failed: user.email") {
                     setPreexistingEmail(true)
                 }
             }
@@ -53,7 +53,7 @@ export default function RegisterUser(props) {
         <>
         <div className='container-sm border border-primary rounded p-10 mt-4 w-25'>
             <h2>Register New User</h2>
-            <form className="needs-validation" novalidate onSubmit={handleSubmit}>
+            <form className="needs-validation" noValidate onSubmit={handleSubmit}>
                 <div className="row p-3 m-2">
                     <input required className='form-control' placeholder='Email' name='email' type="text" value={user.email} onChange={handleChange}></input>
                     <div className='mt-2'>
