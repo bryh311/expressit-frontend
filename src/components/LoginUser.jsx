@@ -9,6 +9,8 @@ export default function LoginUser() {
         password: '',
     })
 
+    const navigate = useNavigate()
+
     const [loginFailed, setLoginFailed] = useState(false)
 
     function handleChange(e) {
@@ -22,9 +24,11 @@ export default function LoginUser() {
         .then((res) => {
             if (res.data.access_token) {
                 localStorage.removeItem("auth_token")
-                localStorage.setItem("auth_token", res.access_token)
+                localStorage.setItem("auth_token", res.data.access_token)
                 localStorage.setItem("email", user.email)
             }
+            // for the time being
+            navigate('/authtest')
             
         })
         .catch((err) => {
@@ -53,7 +57,7 @@ export default function LoginUser() {
                 <div className='row p-3 m-2'>
                     <input required className='form-control' placeholder='Password' name='password' type="password" value={user.password} onChange={handleChange}></input>
                     <div className='mt-3'>
-                        <ErrorBar message='No password' isError={!user.email}/>
+                        <ErrorBar message='No password' isError={!user.password}/>
                     </div>
                 </div>
                 <div>
