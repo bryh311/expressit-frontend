@@ -19,8 +19,8 @@ export default function App() {
         <Routes>
           <Route exact path='/' element={< HomePage />} />
           <Route path='/register' element={< RegisterUser />} />
-          <Route path='/login' element={< LoginUser />}/>
-          <Route path='/post/:post_id' element={< DisplayPost id={post_id} />} />
+          <Route path='/login' element={< LoginUser />} />
+          <Route path='/post/:post_id' element={< DisplayPost />} />
           <Route path='/authtest' element={<TestAuth/>} />
           <Route path='/create-group' element={<GroupForm />} />
           <Route path='/group/:group_name' element={<GroupPage group={group_name} />} />
