@@ -4,7 +4,13 @@ import PostList from "../components/PostList";
 
 export default function HomePage() {
     const [page, setPage] = useState(0)
-    const isLoggedIn = localStorage.getItem("auth_token")
+    const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem("auth_token"))
+
+    function logOut(e) {
+        setIsLoggedIn(0)
+        localStorage.removeItem("auth_token")
+    }
+
     return (
         <>
             <div className="p-1 container row w-50">
@@ -18,7 +24,10 @@ export default function HomePage() {
                     
                 </div>
                 <div className="col-sm">
-                    {isLoggedIn ? <div></div> : 
+                    {isLoggedIn ? 
+                    <div>
+                        <button className="btn btn-primary" onClick={logOut}>Log out</button>
+                    </div> : 
                     <Link to="./login">
                         <button className="btn btn-primary">Log in</button>
                     </Link>

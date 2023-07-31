@@ -23,7 +23,7 @@ export default function App() {
           <Route path='/post/:post_id' element={< DisplayPost />} />
           <Route path='/authtest' element={<TestAuth/>} />
           <Route path='/create-group' element={<GroupForm />} />
-          <Route path='/group/:group_name' element={<GroupPage group={group_name} />} />
+          <Route path='/group/:group_name' element={<GroupPage />} />
         </Routes>
       </div>
     </Router>

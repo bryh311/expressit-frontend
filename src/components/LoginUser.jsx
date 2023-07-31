@@ -27,8 +27,7 @@ export default function LoginUser() {
                 localStorage.setItem("auth_token", res.data.access_token)
                 localStorage.setItem("email", user.email)
             }
-            // for the time being
-            navigate('/authtest')
+            navigate('/')
             
         })
         .catch((err) => {

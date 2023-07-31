@@ -8,7 +8,7 @@ export default function PostButton({post}) {
     return (
         <>
             <Link to={postLink}>
-                <button>{post.title}</button>
+                <button className='alert alert-primary'>{post.title}</button>
             </Link>
         </>
     )

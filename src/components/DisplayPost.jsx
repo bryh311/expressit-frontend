@@ -1,9 +1,12 @@
 import {useState, useEffect} from 'react'
 import {useParams} from 'react-router-dom'
+import VoteButton from './VoteButtons'
 import axios from 'axios'
 
 function DisplayComment({comment}) {
     const [author, setAuthor] = useState("")
+    const [vote, setVote] = useState(0)
+    const isLoggedIn = localStorage.getItem("auth_token")
 
     useEffect(() => {
         axios.get(`http://localhost:8080/api/users/${comment.creator_id}`)
@@ -13,14 +16,34 @@ function DisplayComment({comment}) {
         .catch((err) => {
             console.log(err)
         })
+        
+        axios.get(`http://localhost:8080/api/votes/comment/${comment.comment_id}`)
+        .then((res) => {
+            setVote(res.data.count)
+            // console.log(res.data)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+        
+
     }, [comment.creator_id])
 
 
     return (
         <>
-        <div className="container-sm border border-primary rounded p-10 mt-4 w-50">
-            <p>Author: {author} Votes: {comment.vote}</p>
-            <p>{comment.content}</p>
+        <div className="container-sm border border-primary rounded p-10 mt-4">
+            <div className='row'>
+                <div className='col-sm'>
+                    {isLoggedIn ? <VoteButton isComment={true} id={comment.comment_id} />
+                    : <div></div>}
+                </div>
+                <div className='col-sm'>
+                    <p>Author: {author} Votes: {vote} </p>
+                    
+                </div>
+                <p>{comment.content}</p>
+            </div>
         </div>
         </>
     )
@@ -43,6 +66,7 @@ function CommentForm({postId}) {
         axios.post(`http://localhost:8080/api/comments/post/${postId}`, comment)
         .then((res) => {
             //console.log(res)
+            window.location.reload(true)
         })
         .catch((err) => {
             //console.log(err)
@@ -70,6 +94,8 @@ export default function DisplayPost() {
     const [postData, setPostData] = useState({})
     const [author, setAuthor] = useState("")
     const [commentList, setCommentList] = useState([])
+    const [vote, setVote] = useState(0)
+    const isLoggedIn = localStorage.getItem("auth_token")
 
     useEffect(() => {
         console.log(post_id)
@@ -98,16 +124,31 @@ export default function DisplayPost() {
         .catch((err) => {
             console.log(err)
         })
+
+        axios.get(`http://localhost:8080/api/votes/post/${post_id}`)
+        .then((res) => {
+            setVote(res.data.count)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }, [post_id])
 
     return (
         <>
         <div className='container-sm border border-primary rounded p-10 mt-4 w-50'>
             {postData ? 
-            <div>
-                <h2>{postData.title}</h2>
-                <p>{postData.content}</p>
-                <p>votes: {postData.votes} creator: {author} </p>
+            <div className='row'>
+                <div className='col'>
+                    {isLoggedIn ? <VoteButton isComment={false} id={postData.post_id} />
+                    : <div></div>}
+                </div>
+                <div className='col'>
+                    <h2>{postData.title}</h2>
+                    <p>{postData.content}</p>
+                </div>
+
+                <p>Votes: {vote} Author: {author} </p>
                 <CommentForm postId={postData.post_id} />
                 <div>
                     <ul>{commentList}</ul>
