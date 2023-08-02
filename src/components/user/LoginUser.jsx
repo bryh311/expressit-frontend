@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import ErrorBar from './ErrorBar'
+import ErrorBar from '../ErrorBar'
 
 export default function LoginUser() {
     const [user, setUser] = useState({

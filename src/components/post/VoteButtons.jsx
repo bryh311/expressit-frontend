@@ -1,9 +1,10 @@
 import {useState, useEffect} from 'react'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 export default function VoteButton({isComment, id}) {
     const [voteValue, setVoteValue] = useState(0)
-    
+    const navigate = useNavigate()
 
     useEffect(() => {
         // assumes you are logged in
@@ -17,6 +18,11 @@ export default function VoteButton({isComment, id}) {
         })
         .catch((err) => {
             console.log(err)
+            if (err.response.data) {
+                if (err.response.data === "Forbidden") {
+                    navigate('/login')
+                }
+            }
         })
     }, [id, isComment])
 

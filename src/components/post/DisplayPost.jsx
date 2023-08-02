@@ -25,7 +25,7 @@ function DisplayComment({comment}) {
         .catch((err) => {
             console.log(err)
         })
-        
+        console.log(comment.date)
 
     }, [comment.creator_id])
 
@@ -39,7 +39,7 @@ function DisplayComment({comment}) {
                     : <div></div>}
                 </div>
                 <div className='col-sm'>
-                    <p>Author: {author} Votes: {vote} </p>
+                    <p>Author: {author} Votes: {vote}</p>
                     
                 </div>
                 <p>{comment.content}</p>
@@ -77,8 +77,8 @@ function CommentForm({postId}) {
         return (
             <>
             <form noValidate onSubmit={handleSubmit} >
-                <input required placeholder='message' name='content' type='text' onChange={handleChange}></input>
-                <input type='submit' value='create' ></input>
+                <input className='form-control' required placeholder='message' name='content' type='text' onChange={handleChange}></input>
+                <input className='btn btn-primary' type='submit' value='create' ></input>
             </form>
             </>
         )
