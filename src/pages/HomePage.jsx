@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import PostList from "../components/post/PostList";
+import GroupSearch from "../components/group/GroupSearch"
 import axios from 'axios'
 
 export default function HomePage() {
@@ -90,7 +91,7 @@ export default function HomePage() {
                 </div>
                 <div className="col-sm">
                     {isLoggedIn ?
-                        <Link to="./create_group">
+                        <Link to="./create-group">
                             <button className="btn btn-primary">Create Subgroup</button>
                         </Link>
                     : <div></div>}
@@ -98,6 +99,9 @@ export default function HomePage() {
             </div>
             {isLoggedIn ? 
             <div className='p-1 container row w-50'>
+                <div className='container p-2 m-2'>
+                    <GroupSearch />
+                </div>
                 <div className='col-sm'>
                     <button onClick={getSubscriptions} className="btn btn-primary">My Subscriptions</button>
                 </div>

@@ -30,7 +30,7 @@ export default function GroupForm() {
     }
 
     function handleChange(e) {
-        setSubgroup({...subgroup, [e.target.name]: e.target.value})
+        setSubgroup({...subgroup, [e.target.name]: e.target.value.replace(" ", "-")})
     }
 
     return (
