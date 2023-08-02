@@ -6,7 +6,7 @@ export default function GroupButton({group}) {
     
     return (
         <Link to={groupLink}>
-            <button className='alert alert-primary'>{group.name}</button>
+            <button className='alert alert-warning'>{group.name}</button>
         </Link> 
     )
 }

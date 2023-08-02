@@ -8,6 +8,7 @@ import GroupPage from './pages/GroupPage'
 import DisplayPost from './components/post/DisplayPost'
 import TestAuth from './components/TestAuth'
 import GroupForm from './components/group/GroupForm'
+import PostForm from './components/post/PostForm'
 
 export default function App() {
   let { post_id } = useParams()
@@ -24,6 +25,7 @@ export default function App() {
           <Route path='/authtest' element={<TestAuth/>} />
           <Route path='/create-group' element={<GroupForm />} />
           <Route path='/group/:group_name' element={<GroupPage />} />
+          <Route path='/create-post/:group_name' element={<PostForm/>} />
         </Routes>
       </div>
     </Router>

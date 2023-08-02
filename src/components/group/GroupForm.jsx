@@ -11,20 +11,29 @@ export default function GroupForm() {
     const [alreadyExists, setAlreadyExists] = useState(false)
     const isLoggedIn = localStorage.getItem('auth_token')
 
+    const navigate = useNavigate()
+
     function handleSubmit(e) {
         e.preventDefault()
         setAlreadyExists(false)
         axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("auth_token")}`
         axios.post('http://localhost:8080/api/subgroups/', subgroup)
         .then((res) => {
-            // temporary, will navigate to subgroup page
-            console.log(res)
+            // navigates to the page of the created group
+            navigate(`./group/${subgroup.name}`)
+            
+
         })
         .catch((err) => {
             if (err.response.data.error) {
                 if (err.response.data.error === "SQLITE_CONSTRAINT: UNIQUE constraint failed: subgroup.name") {
                     setAlreadyExists(true)
                 }
+            }
+            if (err.response.data === "Forbidden") {
+                localStorage.removeItem("auth_token")
+                localStorage.removeItem("email")
+                navigate('/login')
             }
         })
     }
