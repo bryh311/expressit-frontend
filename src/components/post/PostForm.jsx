@@ -22,7 +22,7 @@ export default function PostForm() {
         })
         .catch((err) => {
             console.log(err)
-            if (err.repsonse === "Forbidden") {
+            if (err.response === "Forbidden") {
                 localStorage.removeItem("auth_token")
                 localStorage.removeItem("email")
                 navigate("../login")

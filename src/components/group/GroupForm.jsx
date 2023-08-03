@@ -20,7 +20,7 @@ export default function GroupForm() {
         axios.post('http://localhost:8080/api/subgroups/', subgroup)
         .then((res) => {
             // navigates to the page of the created group
-            navigate(`./group/${subgroup.name}`)
+            navigate(`../group/${subgroup.name}`)
             
 
         })
